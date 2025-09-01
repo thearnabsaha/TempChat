@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const checkpointer = new MemorySaver();
 export const agent = async (message: string, threadId: string) => {
-    const system_prompt = `You are a personal assistent, who answers the asked questions.Current date and time is: ${new Date().toUTCString()}`
+    const system_prompt = `You are a personal assistent, who answers the asked questions. Give output only in text not Markdown. Current date and time is: ${new Date().toUTCString()}`
     const search = new TavilySearch({
         maxResults: 5,
         topic: "general",
