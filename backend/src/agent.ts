@@ -2,14 +2,12 @@ import { END, StateGraph, MessagesAnnotation, MemorySaver } from "@langchain/lan
 import { createReactAgent, ToolNode } from "@langchain/langgraph/prebuilt";
 import { TavilySearch } from "@langchain/tavily";
 import { ChatGroq } from "@langchain/groq";
-import { HumanMessage, AIMessage, SystemMessage } from "@langchain/core/messages";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import dotenv from 'dotenv';
 dotenv.config();
 const checkpointer = new MemorySaver();
 export const agent = async (message: string, threadId: string) => {
-    const system_prompt = `You are a personal assistent, who answers the asked questions.
-                    Current date and time is: ${new Date().toUTCString()}
-                    `
+    const system_prompt = `You are a personal assistent, who answers the asked questions.Current date and time is: ${new Date().toUTCString()}`
     const search = new TavilySearch({
         maxResults: 5,
         topic: "general",
@@ -49,12 +47,10 @@ export const agent = async (message: string, threadId: string) => {
         })
 
     const app = workflow.compile({ checkpointer });
-
     const finalState = await app.invoke(
         { messages: [new SystemMessage(system_prompt), new HumanMessage(message)] },
         { configurable: { thread_id: threadId } },
     );
-
     return finalState.messages[finalState.messages.length - 1].content
 }
 

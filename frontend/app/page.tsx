@@ -83,11 +83,10 @@ const page = () => {
           messages.map((e) => {
             return (
               <div key={e.id} className="flex flex-col flex-wrap ">
-                <p className='font-light py-1.5 px-3 rounded-xl bg-accent my-5 max-w-96 self-end whitespace-pre-wrap break-all'>{e.input}</p>
+                <p className='font-light py-1.5 px-3 rounded-xl bg-accent my-5 max-w-96 self-end whitespace-pre-wrap'>{e.input}</p>
                 {
                   e.answer == "Loading..." ?
-                    <p className='font-light py-1.5 px-3 rounded-xl my-5 self-start whitespace-pre-wrap break-all animate-pulse'>{e.answer}</p>
-                    // : <p className='font-light py-1.5 px-3 rounded-xl my-5 self-start whitespace-pre-wrap break-all'>{e.answer}</p>
+                    <p className='font-light py-1.5 px-3 rounded-xl my-5 self-start whitespace-pre-wrap animate-pulse'>{e.answer}</p>
                     : <ReactMarkdown>{e.answer}</ReactMarkdown>
                 }
               </div>
